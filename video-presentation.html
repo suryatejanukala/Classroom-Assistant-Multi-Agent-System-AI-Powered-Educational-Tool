@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Classroom Assistant - Project Flow Video</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            overflow: hidden;
+        }
+        .slide {
+            display: none;
+            width: 100vw;
+            height: 100vh;
+            padding: 40px;
+            box-sizing: border-box;
+            text-align: center;
+            position: relative;
+        }
+        .slide.active {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        .slide h1 {
+            font-size: 3em;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        .slide h2 {
+            font-size: 2.5em;
+            margin-bottom: 30px;
+            color: #ffd700;
+        }
+        .slide p {
+            font-size: 1.5em;
+            line-height: 1.6;
+            max-width: 800px;
+            margin: 0 auto 30px;
+        }
+        .flow-diagram {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+        }
+        .flow-step {
+            background: rgba(255,255,255,0.1);
+            border: 2px solid rgba(255,255,255,0.3);
+            border-radius: 15px;
+            padding: 20px 40px;
+            font-size: 1.3em;
+            font-weight: bold;
+            min-width: 300px;
+            backdrop-filter: blur(10px);
+            animation: slideIn 0.8s ease-out;
+        }
+        .agents-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            margin: 40px 0;
+        }
+        .agent-card {
+            background: rgba(255,255,255,0.15);
+            border-radius: 15px;
+            padding: 30px;
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(255,255,255,0.2);
+            animation: fadeInUp 1s ease-out;
+        }
+        .agent-card h3 {
+            font-size: 1.8em;
+            margin-bottom: 15px;
+            color: #ffd700;
+        }
+        .features-list {
+            text-align: left;
+            font-size: 1.3em;
+            line-height: 2;
+            max-width: 600px;
+        }
+        .features-list li {
+            margin: 15px 0;
+            animation: slideInLeft 0.8s ease-out;
+        }
+        .arrow {
+            font-size: 3em;
+            color: #ffd700;
+            animation: bounce 2s infinite;
+        }
+        .controls {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 1000;
+        }
+        .btn {
+            background: rgba(255,255,255,0.2);
+            border: 2px solid rgba(255,255,255,0.3);
+            color: white;
+            padding: 10px 20px;
+            margin: 5px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 1em;
+            backdrop-filter: blur(10px);
+        }
+        .btn:hover {
+            background: rgba(255,255,255,0.3);
+        }
+        .slide-counter {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            font-size: 1.2em;
+            background: rgba(0,0,0,0.3);
+            padding: 10px 20px;
+            border-radius: 20px;
+        }
+        @keyframes slideIn {
+            from { transform: translateX(-100px); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+        @keyframes fadeInUp {
+            from { transform: translateY(50px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+        @keyframes slideInLeft {
+            from { transform: translateX(-50px); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+            40% { transform: translateY(-10px); }
+            60% { transform: translateY(-5px); }
+        }
+    </style>
+</head>
+<body>
+    <div class="slide-counter">
+        <span id="current-slide">1</span> / <span id="total-slides">8</span>
+    </div>
+
+    <!-- Slide 1: Title -->
+    <div class="slide active">
+        <h1>Classroom Assistant</h1>
+        <p style="font-size: 2em; color: #ffd700;">Multi-Agent System</p>
+        <p>A comprehensive AI-powered system built with ADK-Java that assists teachers with lesson planning, worksheet creation, grading, and student performance tracking.</p>
+    </div>
+
+    <!-- Slide 2: Problem Statement -->
+    <div class="slide">
+        <h2>The Challenge</h2>
+        <ul class="features-list">
+            <li>✗ Teachers spend hours creating lesson plans manually</li>
+            <li>✗ Worksheet generation is time-consuming and repetitive</li>
+            <li>✗ Grading student work takes significant effort</li>
+            <li>✗ Tracking student performance across multiple assignments is complex</li>
+            <li>✗ No centralized system for educational content management</li>
+        </ul>
+    </div>
+
+    <!-- Slide 3: Solution Overview -->
+    <div class="slide">
+        <h2>Our Solution</h2>
+        <div class="agents-grid">
+            <div class="agent-card">
+                <h3>🎯 Orchestrator Agent</h3>
+                <p>Coordinates all system operations and routes requests to appropriate agents</p>
+            </div>
+            <div class="agent-card">
+                <h3>📚 Lesson Plan Agent</h3>
+                <p>Generates structured, curriculum-aligned lesson plans automatically</p>
+            </div>
+            <div class="agent-card">
+                <h3>📝 Worksheet Agent</h3>
+                <p>Creates dynamic worksheets and quizzes with integrated tools</p>
+            </div>
+        </div>
+        <div class="agent-card" style="max-width: 400px; margin: 20px auto;">
+            <h3>✅ Grading Agent</h3>
+            <p>Provides intelligent grading with personalized feedback</p>
+        </div>
+    </div>
+
+    <!-- Slide 4: System Architecture -->
+    <div class="slide">
+        <h2>System Architecture</h2>
+        <div class="flow-diagram">
+            <div class="flow-step">👩‍🏫 Teacher Input</div>
+            <div class="arrow">↓</div>
+            <div class="flow-step">🚀 ClassroomAssistantApplication</div>
+            <div class="arrow">↓</div>
+            <div class="flow-step">🎯 OrchestratorAgent (Request Analysis)</div>
+            <div class="arrow">↓</div>
+            <div class="flow-step">🤖 Specialized Agents (Processing)</div>
+            <div class="arrow">↓</div>
+            <div class="flow-step">💾 Memory & Metrics Services</div>
+            <div class="arrow">↓</div>
+            <div class="flow-step">📊 Formatted Response</div>
+        </div>
+    </div>
+
+    <!-- Slide 5: Request Flow -->
+    <div class="slide">
+        <h2>Request Processing Flow</h2>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: start;">
+            <div>
+                <h3 style="color: #ffd700;">Step-by-Step Process:</h3>
+                <ol class="features-list" style="text-align: left;">
+                    <li>Teacher submits request</li>
+                    <li>Application starts timer & metrics</li>
+                    <li>Orchestrator analyzes request type</li>
+                    <li>Routes to appropriate agent</li>
+                    <li>Agent processes using tools</li>
+                    <li>Results stored in memory</li>
+                    <li>Response formatted & returned</li>
+                </ol>
+            </div>
+            <div>
+                <h3 style="color: #ffd700;">Request Types:</h3>
+                <ul class="features-list" style="text-align: left;">
+                    <li>📚 LESSON_PLAN</li>
+                    <li>📝 WORKSHEET</li>
+                    <li>✅ GRADING</li>
+                    <li>📊 PERFORMANCE_ANALYSIS</li>
+                    <li>💾 MEMORY_SUMMARY</li>
+                    <li>📈 METRICS_REPORT</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 6: Key Features -->
+    <div class="slide">
+        <h2>Key Features</h2>
+        <div class="agents-grid">
+            <div class="agent-card">
+                <h3>🔄 Multi-Agent Architecture</h3>
+                <p>Orchestrated system with specialized agents for different tasks</p>
+            </div>
+            <div class="agent-card">
+                <h3>🧠 Memory Management</h3>
+                <p>Long-term storage with context compaction and session management</p>
+            </div>
+            <div class="agent-card">
+                <h3>🔍 Observability</h3>
+                <p>Comprehensive logging, tracing, and metrics for system monitoring</p>
+            </div>
+            <div class="agent-card">
+                <h3>🛠️ Tool Integration</h3>
+                <p>Google Search, Performance Analytics, and Java Process tools</p>
+            </div>
+            <div class="agent-card">
+                <h3>⚡ Performance</h3>
+                <p>Fast worksheet generation (~25ms) and optimized lesson planning</p>
+            </div>
+            <div class="agent-card">
+                <h3>📈 Analytics</h3>
+                <p>Student performance tracking and educational insights</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 7: Technical Stack -->
+    <div class="slide">
+        <h2>Technical Implementation</h2>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 40px;">
+            <div>
+                <h3 style="color: #ffd700;">Core Technologies:</h3>
+                <ul class="features-list">
+                    <li>☕ Java 11+ with ADK-Java SDK</li>
+                    <li>🔧 Maven for build management</li>
+                    <li>🤖 Multi-agent architecture</li>
+                    <li>💾 In-memory session management</li>
+                    <li>📊 Integrated metrics system</li>
+                </ul>
+            </div>
+            <div>
+                <h3 style="color: #ffd700;">Key Components:</h3>
+                <ul class="features-list">
+                    <li>🎯 OrchestratorAgent</li>
+                    <li>📚 LessonPlanAgent</li>
+                    <li>📝 WorksheetAgent</li>
+                    <li>✅ GradingAgent</li>
+                    <li>🔍 StudentPerformanceTool</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 8: Results & Impact -->
+    <div class="slide">
+        <h2>Results & Impact</h2>
+        <div class="agents-grid">
+            <div class="agent-card">
+                <h3>⏱️ Time Savings</h3>
+                <p>Reduces lesson planning time from hours to minutes</p>
+            </div>
+            <div class="agent-card">
+                <h3>🎯 Consistency</h3>
+                <p>Standardized, curriculum-aligned educational content</p>
+            </div>
+            <div class="agent-card">
+                <h3>📊 Data-Driven</h3>
+                <p>Performance analytics for informed teaching decisions</p>
+            </div>
+        </div>
+        <p style="font-size: 2em; color: #ffd700; margin-top: 40px;">Empowering Teachers with AI-Driven Educational Tools</p>
+    </div>
+
+    <div class="controls">
+        <button class="btn" onclick="previousSlide()">← Previous</button>
+        <button class="btn" onclick="nextSlide()">Next →</button>
+        <button class="btn" onclick="toggleAutoplay()" id="autoplay-btn">▶️ Auto</button>
+    </div>
+
+    <script>
+        let currentSlide = 0;
+        let autoplay = false;
+        let autoplayInterval;
+        const slides = document.querySelectorAll('.slide');
+        const totalSlides = slides.length;
+
+        document.getElementById('total-slides').textContent = totalSlides;
+
+        function showSlide(n) {
+            slides[currentSlide].classList.remove('active');
+            currentSlide = (n + totalSlides) % totalSlides;
+            slides[currentSlide].classList.add('active');
+            document.getElementById('current-slide').textContent = currentSlide + 1;
+        }
+
+        function nextSlide() {
+            showSlide(currentSlide + 1);
+        }
+
+        function previousSlide() {
+            showSlide(currentSlide - 1);
+        }
+
+        function toggleAutoplay() {
+            const btn = document.getElementById('autoplay-btn');
+            if (autoplay) {
+                clearInterval(autoplayInterval);
+                autoplay = false;
+                btn.textContent = '▶️ Auto';
+            } else {
+                autoplayInterval = setInterval(nextSlide, 4000);
+                autoplay = true;
+                btn.textContent = '⏸️ Stop';
+            }
+        }
+
+        // Keyboard navigation
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'ArrowRight' || e.key === ' ') {
+                nextSlide();
+            } else if (e.key === 'ArrowLeft') {
+                previousSlide();
+            } else if (e.key === 'Escape') {
+                if (autoplay) toggleAutoplay();
+            }
+        });
+
+        // Initialize
+        showSlide(0);
+    </script>
+</body>
+</html>
